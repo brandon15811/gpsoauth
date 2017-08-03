@@ -66,7 +66,7 @@ def perform_master_login(email, password, android_id = None,
         'sdk_version': sdk_version
     }
     
-     if android_id:
+    if android_id:
         data['androidId'] = android_id
 
     return _perform_auth_request(data, proxy)
