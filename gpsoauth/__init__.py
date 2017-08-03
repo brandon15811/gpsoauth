@@ -28,7 +28,7 @@ def _perform_auth_request(data, proxy=None):
     return google.parse_auth_response(res.text)
 
 
-def perform_master_login(email, password, android_id,
+def perform_master_login(email, password, android_id = None,
                          service='ac2dm', device_country='us', operatorCountry='us',
                          lang='en', sdk_version=17, proxy=None):
     """
@@ -60,12 +60,14 @@ def perform_master_login(email, password, android_id,
         'EncryptedPasswd': google.signature(email, password, android_key_7_3_29),
         'service': service,
         'source':  'android',
-        'androidId':   android_id,
         'device_country':  device_country,
         'operatorCountry': device_country,
         'lang':    lang,
         'sdk_version': sdk_version
     }
+    
+     if android_id:
+        data['androidId'] = android_id
 
     return _perform_auth_request(data, proxy)
 
